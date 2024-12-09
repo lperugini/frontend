@@ -1,0 +1,9 @@
+<% services.forEach(function(service) { %>
+<div class="card" style="width: 18rem">
+  <div class="card-body">
+    <h5 class="card-title"><%= service.code %></h5>
+    <p class="card-text"><%= service.description %></p>
+    <p class="card-text"><%= service.price %> €</p>
+  </div>
+</div>
+<% }); %>
