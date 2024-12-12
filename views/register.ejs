@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <%- include('sections/header'); %>
+  <body class="text-center">
+    <form action="signup" method="POST" class="form-signin">
+      <img
+        class="mb-4"
+        src="https://bc6dcae6.rocketcdn.me/wp-content/uploads/2022/11/logo-perizia-facile-def.png"
+        alt=""
+      />
+      <h1 class="h3 mb-3 font-weight-normal">Sign up</h1>
+      <input
+        type="text"
+        class="form-control"
+        name="firstname"
+        placeholder="Nome"
+        required=""
+      />
+      <input
+        class="form-control"
+        type="text"
+        name="lastname"
+        placeholder="Cognome"
+        required=""
+      />
+
+      <input
+        class="form-control"
+        type="email"
+        name="email"
+        placeholder="Email"
+        required=""
+      />
+
+      <input
+        type="password"
+        name="password"
+        class="form-control"
+        placeholder="Password"
+        required=""
+      />
+      <button class="btn btn-lg btn-primary btn-block w-100" type="submit">
+        Sign up
+      </button>
+      <a class="button w-100" href="/login">Login</a>
+    </form>
+  </body>
+</html>

@@ -58,7 +58,7 @@ app.get("/", async (req, res) => {
 
 // Default route
 app.get("/login", async (req, res) => {
-  res.sendFile(__dirname + "/login.html");
+  res.render("login");
 });
 
 // Route to authenticate and log in a user
@@ -82,11 +82,11 @@ app.post("/login", async (req, res) => {
   return true;
 });
 
-app.get("/register", (req, res) => {
-  res.sendFile(__dirname + "/register.html");
+app.get("/signup", (req, res) => {
+  res.render("register");
 });
 
-app.post("/register", async (req, res) => {
+app.post("/signup", async (req, res) => {
   axios
     .post("http://localhost:8080/auth/register", req.body, {
       headers: {
