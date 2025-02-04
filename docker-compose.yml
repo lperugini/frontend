@@ -1,0 +1,10 @@
+# docker-compose.yml
+version: '3.8'
+
+services:
+  app:
+    build: .
+    ports:
+      - "8090:8090"
+    environment:
+      - NODE_ENV=production
