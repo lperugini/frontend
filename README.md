@@ -25,11 +25,58 @@ Questa versione rappresenta una demo accademica.
 - Node.js (versione consigliata: LTS)
 - NPM o Yarn
 
-### Avvio dell'applicazione
+### **Esecuzione**
+
+#### **Avvio manuale:**
 ```sh
 npm start
 ```
-L'applicazione sarà disponibile su `http://localhost:3000` (porta predefinita).
+
+#### **Avvio con Docker**
+L'applicazione può essere containerizzata con il seguente `Dockerfile`:
+
+```dockerfile
+# Imposta la directory di lavoro
+FROM node:18-alpine
+WORKDIR /usr/src/app
+
+# Copia package.json e package-lock.json
+COPY package*.json ./
+
+# Installa le dipendenze
+RUN npm install
+
+# Copia il codice sorgente
+COPY . .
+
+# Espone la porta dell'applicazione
+EXPOSE 8090
+
+# Comando di avvio
+CMD ["node", "app.js"]
+```
+
+Per costruire l'immagine può essere utilizzato il seguente `docker-compose.yml`:
+
+```yaml
+# docker-compose.yml
+version: '3.8'
+
+services:
+  app:
+    build: .
+    ports:
+      - "8090:8090"
+    environment:
+      - NODE_ENV=production
+```
+
+Per avviare:
+```sh
+docker-compose up --build
+```
+
+L'applicazione sarà disponibile su `http://localhost:8090` (porta predefinita).
 
 ---
 **Autore:** _Leonardo Perugini - leonardo.perugini2@studio.unibo.it_

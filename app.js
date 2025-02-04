@@ -53,14 +53,17 @@ app.get("/logout", async (req, res) => {
 
 app.get("/", async (req, res) => {
   let token = localStorage.getItem("jwtoken");
-  if (token == null) res.redirect("/login");
+  if (token === null) res.redirect("/login");
   else res.redirect("/home");
 });
 
 // Default route
 app.get("/login", async (req, res) => {
-  if (localStorage.getItem("jwtoken") == null) res.render("login");
-  else res.redirect("/home");
+  if (localStorage.getItem("jwtoken") === null) {
+    res.render("login");
+  } else {
+    res.redirect("/home");
+  }
 });
 
 // Route to authenticate and log in a user
@@ -105,6 +108,11 @@ app.post("/signup", async (req, res) => {
 /* ---------------------------------------- */
 
 app.get("/home", async (req, res) => {
+  console.log(localStorage.getItem("jwtoken"));
+  if (localStorage.getItem("jwtoken") === null) {
+    return res.redirect("/logout");
+  }
+
   getMe()
     .then(async (r) => {
       const username = r.data.username;
