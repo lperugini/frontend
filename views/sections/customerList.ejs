@@ -1,0 +1,9 @@
+<% customers.forEach(function(customer) { %>
+<div class="card" style="width: 18rem">
+  <div class="card-body">
+    <a href="customers/<%= customer.id %>">
+      <h5 class="card-title"><%= customer.firstName %><%= customer.lastName %></h5>
+    </a>
+  </div>
+</div>
+<% }); %>

@@ -1,0 +1,42 @@
+<div class="d-flex flex-column flex-shrink-0 p-3 bg-white" style="width: 280px">
+  <a
+    href="/home"
+    class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none"
+  >
+    <img
+      class="mb-4 w-100"
+      src="https://bc6dcae6.rocketcdn.me/wp-content/uploads/2022/11/logo-perizia-facile-def.png"
+      alt=""
+    />
+  </a>
+  <hr />
+  <ul class="nav nav-pills flex-column mb-auto">
+    <%- include('sidebaritem', { itemclass:'nav-item', link:'home',
+    text:'Home'}); %> <% if(role=="admin") { %> <%- include('sidebaritem', {
+    itemclass:'nav-item', link:'users', text:'Utenti'}); %><% } %> <%-
+    include('sidebaritem', { itemclass:'nav-item', link:'orders',
+    text:'Ordini'}); %> <%- include('sidebaritem', { itemclass:'nav-item',
+    link:'items', text:'Prodotti'}); %> <% if(role=="admin") { %> <%-
+    include('sidebaritem', { itemclass:'nav-item', link:'collabs',
+    text:'Collaboratori'}); %> <%- include('sidebaritem', {
+    itemclass:'nav-item', link:'customers', text:'Clienti'}); %> <% } %>
+  </ul>
+  <hr />
+  <div class="dropdown">
+    <a
+      href="#"
+      class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle"
+      id="dropdownUser2"
+      data-bs-toggle="dropdown"
+      aria-expanded="false"
+    >
+      <%- include('../profile/avatar'); %>
+      <strong><%= username %> [<%= role %>]</strong>
+    </a>
+    <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
+      <li><a class="dropdown-item" href="/me">Profile</a></li>
+      <li><hr class="dropdown-divider" /></li>
+      <li><a class="dropdown-item" href="/logout">Log out</a></li>
+    </ul>
+  </div>
+</div>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+  <%- include('../sections/header'); %>
+  <body>
+    <%- include('../sections/navbar'); %>
+    <main>
+      <%- include('../sections/sidebar'); %>
+      <div class="d-flex flex-column flex-shrink-0 p-3 bg-white h-100">
+        <h1>Ordine</h1>
+        <form method="post" action="/orders/<%= order.id %>">
+          <div class="form-group">
+            <label for="id">ID: <%= order.id %></label>
+            <input
+              type="text"
+              id="id"
+              name="id"
+              class="form-control"
+              disabled
+              placeholder="id"
+              required=""
+              autofocus=""
+              value="<%= order.id %>"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="code">Codice</label>
+            <input
+              disabled
+              type="text"
+              id="code"
+              name="code"
+              class="form-control"
+              placeholder="Codice"
+              required=""
+              autofocus=""
+              value="<%= order.code %>"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="code">Descrizione</label>
+            <input
+              type="text"
+              id="description"
+              name="description"
+              class="form-control"
+              placeholder="Descrizione"
+              required=""
+              autofocus=""
+              value="<%= order.description %>"
+            />
+          </div>
+
+          <button class="btn btn-primary btn-block mt-1 w-100" type="submit">
+            Salva
+          </button>
+        </form>
+      </div>
+    </main>
+  </body>
+</html>

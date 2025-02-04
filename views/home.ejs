@@ -4,9 +4,11 @@
 
   <body>
     <%- include('sections/navbar'); %>
-
-    <h1>Welcome, <%= username %>!</h1>
-
-    <%- include('sections/serviceList'); %>
+    <main>
+      <%- include('sections/sidebar'); %>
+      <div class="d-flex flex-column flex-shrink-0 p-3 bg-white w-100 h-100">
+        <h1>Welcome, <%= username %>!</h1>
+      </div>
+    </main>
   </body>
 </html>

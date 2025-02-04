@@ -1,0 +1,11 @@
+<% users.forEach(function(user) { %>
+<div class="card" style="width: 18rem">
+  <div class="card-body">
+    <a href="users/<%= user.id %>">
+      <h5 class="card-title"><%= user.firstName %><%= user.lastName %></h5>
+    </a>
+    <p class="card-text"><%= user.username %></p>
+    <p class="card-text"><%= user.email %></p>
+  </div>
+</div>
+<% }); %>

@@ -1,0 +1,11 @@
+<% orders.forEach(function(order) { %>
+<div class="card" style="width: 18rem">
+  <div class="card-body">
+    <a href="orders/<%= order.id %>"
+      ><h5 class="card-title"><%= order.code %></h5>
+    </a>
+    <p class="card-text"><%= order.customer %></p>
+    <p class="card-text"><%= order.product %></p>
+  </div>
+</div>
+<% }); %>

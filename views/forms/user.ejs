@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+  <%- include('../sections/header'); %>
+  <body>
+    <%- include('../sections/navbar'); %>
+    <main>
+      <%- include('../sections/sidebar'); %>
+      <div class="d-flex flex-column flex-shrink-0 p-3 bg-white h-100">
+        <h1>Utente</h1>
+        <form method="post" action="/users/<%= user.id %>">
+          <div class="form-group">
+            <label for="id">ID: <%= user.id %></label>
+            <input
+              type="text"
+              id="id"
+              name="id"
+              class="form-control"
+              disabled
+              placeholder="id"
+              required=""
+              autofocus=""
+              value="<%= user.id %>"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="firstName">Nome</label>
+            <input
+              disabled
+              type="text"
+              id="firstName"
+              name="firstName"
+              class="form-control"
+              placeholder="Nome"
+              required=""
+              autofocus=""
+              value="<%= user.firstName %>"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="code">Cognome</label>
+            <input
+              type="text"
+              id="lastName"
+              name="lastName"
+              class="form-control"
+              placeholder="Cognome"
+              required=""
+              autofocus=""
+              value="<%= user.lastName %>"
+            />
+          </div>
+
+          <button class="btn btn-primary btn-block mt-1 w-100" type="submit">
+            Salva
+          </button>
+        </form>
+      </div>
+    </main>
+  </body>
+</html>

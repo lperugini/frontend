@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+  <%- include('../sections/header'); %>
+  <body>
+    <%- include('../sections/navbar'); %>
+    <main>
+      <%- include('../sections/sidebar'); %>
+      <div class="d-flex flex-column flex-shrink-0 p-3 bg-white h-100">
+        <h1>Prodotto</h1>
+        <form method="post" action="/items/<%= item.id %>">
+          <div class="form-group">
+            <label for="id">ID</label>
+            <input
+              type="text"
+              id="id"
+              name="id"
+              class="form-control"
+              disabled
+              placeholder="id"
+              required=""
+              autofocus=""
+              value="<%= item.id %>"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="name">Nome</label>
+            <input
+              disabled
+              type="text"
+              id="name"
+              name="name"
+              class="form-control"
+              placeholder="Nome"
+              required=""
+              autofocus=""
+              value="<%= item.name %>"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="code">Codice</label>
+            <input
+              disabled
+              type="text"
+              id="code"
+              name="code"
+              class="form-control"
+              placeholder="Codice"
+              required=""
+              autofocus=""
+              value="<%= item.code %>"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="code">Descrizione</label>
+            <textarea
+              id="description"
+              name="description"
+              class="form-control"
+              placeholder="Descrizione"
+              required=""
+              autofocus=""
+              rows="5"
+              value=""
+              disabled
+            >
+<%= item.description %>
+            </textarea>
+          </div>
+          <% if(role=="admin") { %>
+          <button class="btn btn-primary btn-block mt-1 w-100" type="submit">
+            Salva
+          </button>
+          <% } %> <% if(role=="user") { %>
+          <button class="btn btn-primary btn-block mt-1 w-100" type="button">
+            Acquista
+          </button>
+          <% } %>
+        </form>
+      </div>
+    </main>
+  </body>
+</html>

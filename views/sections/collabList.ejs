@@ -1,0 +1,9 @@
+<% collaborators.forEach(function(item) { %>
+<div class="card" style="width: 18rem">
+  <div class="card-body">
+    <a href="collabs/<%= item.id %>">
+      <h5 class="card-title"><%= item.firstName %><%= item.lastName %></h5>
+    </a>
+  </div>
+</div>
+<% }); %>

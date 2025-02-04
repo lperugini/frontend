@@ -1,0 +1,11 @@
+<% items.forEach(function(item) { %>
+<div class="card" style="width: 18rem">
+  <div class="card-body">
+    <a href="items/<%= item.id %>">
+      <h5 class="card-title"><%= item.name %></h5>
+    </a>
+    <p class="card-text"><%= item.description %></p>
+    <p class="card-text"><%= item.price %> €</p>
+  </div>
+</div>
+<% }); %>
