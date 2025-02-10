@@ -2,10 +2,11 @@
 <div class="card" style="width: 18rem">
   <div class="card-body">
     <a href="users/<%= user.id %>">
-      <h5 class="card-title"><%= user.firstName %><%= user.lastName %></h5>
+      <h5 class="card-title"><%= user.firstName + ' ' + user.lastName %></h5>
     </a>
-    <p class="card-text"><%= user.username %></p>
-    <p class="card-text"><%= user.email %></p>
+    <p class="card-text">username: <%= user.username %></p>
+    <p class="card-text">e-mail: <%= user.e_mail %></p>
+    <p class="card-text">rolo: <%= user.role %></p>
   </div>
 </div>
 <% }); %>

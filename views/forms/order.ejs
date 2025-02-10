@@ -7,49 +7,29 @@
       <%- include('../sections/sidebar'); %>
       <div class="d-flex flex-column flex-shrink-0 p-3 bg-white h-100">
         <h1>Ordine</h1>
-        <form method="post" action="/orders/<%= order.id %>">
+        <form method="post" action="/orders/<%= data.order.id %>">
           <div class="form-group">
-            <label for="id">ID: <%= order.id %></label>
-            <input
-              type="text"
-              id="id"
-              name="id"
-              class="form-control"
-              disabled
-              placeholder="id"
-              required=""
-              autofocus=""
-              value="<%= order.id %>"
-            />
+            <p>ID: <%= data.order.id %></p>
+            <p>ID: <%= data.order.code %></p>
+            <p>Utente: <%= data.user.firstName + ' ' + data.user.lastName %></p>
+            <p>Prodotto: <%= data.item.name %></p>
           </div>
-
-          <div class="form-group">
-            <label for="code">Codice</label>
-            <input
-              disabled
-              type="text"
-              id="code"
-              name="code"
-              class="form-control"
-              placeholder="Codice"
-              required=""
-              autofocus=""
-              value="<%= order.code %>"
-            />
-          </div>
-
+          
           <div class="form-group">
             <label for="code">Descrizione</label>
-            <input
-              type="text"
+            <textarea
               id="description"
               name="description"
               class="form-control"
               placeholder="Descrizione"
               required=""
               autofocus=""
-              value="<%= order.description %>"
-            />
+              rows="5"
+              value=""
+            >
+<%= data.order.description %>
+          </textarea
+            >
           </div>
 
           <button class="btn btn-primary btn-block mt-1 w-100" type="submit">

@@ -60,7 +60,9 @@ app.get("/", async (req, res) => {
 // Default route
 app.get("/login", async (req, res) => {
   if (localStorage.getItem("jwtoken") === null) {
-    res.render("login");
+    res.render("login", {
+      errlogin: "",
+    });
   } else {
     res.redirect("/home");
   }
@@ -75,7 +77,9 @@ app.post("/login", async (req, res) => {
       res.redirect("/home");
     })
     .catch((err) => {
-      res.status(500).json({ message: err });
+      res.render("login", {
+        errlogin: "credenziali errate",
+      });
     });
 
   return true;
@@ -108,7 +112,6 @@ app.post("/signup", async (req, res) => {
 /* ---------------------------------------- */
 
 app.get("/home", async (req, res) => {
-  console.log(localStorage.getItem("jwtoken"));
   if (localStorage.getItem("jwtoken") === null) {
     return res.redirect("/logout");
   }
@@ -149,115 +152,15 @@ app.get("/api/user", verifyToken, async (req, res) => {
 /* --------------- Services --------------- */
 /* ---------------------------------------- */
 
-app.get("/customers", async (req, res) => {
-  res.render("pages/customers", {
-    username: "leonardo",
-    customers: (await getCustomers()).data._embedded.customerList,
-  });
-  return;
-  getMe()
-    .then(async (r) => {
-      const username = r.data.username;
-      res.render("services", {
-        username: username,
-        services: (await getUsers()).data._embedded.userModelList,
-      });
-    })
-    .catch((err) => {
-      res.status(500).json({ message: err });
-    });
-});
-
-app.get("/customers/:id", async (req, res) => {
-  id = req.params.id;
-  res.render("forms/customer", {
-    username: "leonardo",
-    customer: (await getCustomer(id)).data,
-  });
-  return;
-  getMe()
-    .then(async (r) => {
-      const username = r.data.username;
-      res.render("services", {
-        username: username,
-        services: (await getUsers()).data._embedded.userModelList,
-      });
-    })
-    .catch((err) => {
-      res.status(500).json({ message: err });
-    });
-});
-
-app.post("/customers/:id", async (req, res) => {
-  id = req.params.id;
-  console.log(req.body);
-  putCustomer(id, req.body).then(() => {
-    res.redirect("/orders/" + id);
-  });
-  return;
-  getMe()
-    .then(async (r) => {
-      const username = r.data.username;
-      res.render("services", {
-        username: username,
-        services: (await getUsers()).data._embedded.userModelList,
-      });
-    })
-    .catch((err) => {
-      res.status(500).json({ message: err });
-    });
-});
-
-app.get("/collabs", async (req, res) => {
-  res.render("pages/collabs", {
-    username: "leonardo",
-    collaborators: (await getCollabs()).data._embedded.collaboratorList,
-  });
-  return;
-  getMe()
-    .then(async (r) => {
-      const username = r.data.username;
-      res.render("services", {
-        username: username,
-        services: (await getUsers()).data._embedded.userModelList,
-      });
-    })
-    .catch((err) => {
-      res.status(500).json({ message: err });
-    });
-});
-
-app.get("/collabs/:id", async (req, res) => {
-  id = req.params.id;
-
-  res.render("forms/collab", {
-    username: "leonardo",
-    collab: (await getCollab(id)).data,
-  });
-  /* getMe()
-    .then(async (r) => {
-      res.render("orders", {
-        username: username,
-        services: (await getItems()).data._embedded.itemList,
-      });
-    })
-    .catch((err) => {
-      res.status(500).json({ message: err });
-    }); */
-});
-
 app.get("/users", async (req, res) => {
-  res.render("pages/users", {
-    username: "leonardo",
-    users: (await getUsers()).data._embedded.userModelList,
-  });
-  return;
   getMe()
     .then(async (r) => {
       const username = r.data.username;
-      res.render("services", {
+      const role = r.data.role;
+      res.render("pages/users", {
         username: username,
-        services: (await getUsers()).data._embedded.userModelList,
+        role: role,
+        users: (await getUsers()).data._embedded.userList,
       });
     })
     .catch((err) => {
@@ -267,10 +170,14 @@ app.get("/users", async (req, res) => {
 
 app.get("/users/:id", async (req, res) => {
   id = req.params.id;
-
-  res.render("forms/user", {
-    username: "leonardo",
-    user: (await getUser(id)).data,
+  getMe().then(async (r) => {
+    const username = r.data.username;
+    const role = r.data.role;
+    res.render("forms/user", {
+      username: "leonardo",
+      role: role,
+      user: (await getUser(id)).data,
+    });
   });
   /* getMe()
     .then(async (r) => {
@@ -314,39 +221,28 @@ app.get("/items/:id", async (req, res) => {
 });
 
 app.get("/orders", async (req, res) => {
-  res.render("pages/orders", {
-    username: "leonardo",
-    orders: (await getOrders()).data._embedded.orderList,
+  getMe().then(async (r) => {
+    const username = r.data.username;
+    const role = r.data.role;
+    res.render("pages/orders", {
+      username: username,
+      role: role,
+      orders: (await getOrders()).data._embedded.orderList,
+    });
   });
-  /* getMe()
-    .then(async (r) => {
-      res.render("orders", {
-        username: username,
-        services: (await getItems()).data._embedded.itemList,
-      });
-    })
-    .catch((err) => {
-      res.status(500).json({ message: err });
-    }); */
 });
 
 app.get("/orders/:id", async (req, res) => {
   id = req.params.id;
-
-  res.render("forms/order", {
-    username: "leonardo",
-    order: (await getOrder(id)).data,
+  getMe().then(async (r) => {
+    const username = r.data.username;
+    const role = r.data.role;
+    res.render("forms/order", {
+      username: username,
+      role: role,
+      data: (await getOrder(id)).data,
+    });
   });
-  /* getMe()
-    .then(async (r) => {
-      res.render("orders", {
-        username: username,
-        services: (await getItems()).data._embedded.itemList,
-      });
-    })
-    .catch((err) => {
-      res.status(500).json({ message: err });
-    }); */
 });
 
 app.post("/orders/:id", async (req, res) => {
@@ -390,7 +286,7 @@ getUsers = async function () {
     headers: {
       "Cache-Control": "no-cache",
       "Content-Type": "application/json",
-      //Authorization: "Bearer " + localStorage.getItem("jwtoken"),
+      Authorization: "Bearer " + localStorage.getItem("jwtoken"),
     },
   });
 };
@@ -495,7 +391,7 @@ getItem = async function (id) {
 };
 
 getOrders = async function () {
-  return axios.get("http://localhost:8083/orders", {
+  return axios.get("http://localhost:8080/orders", {
     headers: {
       "Cache-Control": "no-cache",
       "Content-Type": "application/json",
@@ -505,7 +401,7 @@ getOrders = async function () {
 };
 
 getOrder = async function (id) {
-  return axios.get("http://localhost:8083/orders/" + id, {
+  return axios.get("http://localhost:8080/orders/" + id, {
     headers: {
       "Cache-Control": "no-cache",
       "Content-Type": "application/json",

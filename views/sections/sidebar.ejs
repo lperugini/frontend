@@ -13,13 +13,10 @@
   <ul class="nav nav-pills flex-column mb-auto">
     <%- include('sidebaritem', { itemclass:'nav-item', link:'home',
     text:'Home'}); %> <% if(role=="admin") { %> <%- include('sidebaritem', {
-    itemclass:'nav-item', link:'users', text:'Utenti'}); %><% } %> <%-
+    itemclass:'nav-item', link:'users', text:'Utenti'}); %> <%-
     include('sidebaritem', { itemclass:'nav-item', link:'orders',
     text:'Ordini'}); %> <%- include('sidebaritem', { itemclass:'nav-item',
-    link:'items', text:'Prodotti'}); %> <% if(role=="admin") { %> <%-
-    include('sidebaritem', { itemclass:'nav-item', link:'collabs',
-    text:'Collaboratori'}); %> <%- include('sidebaritem', {
-    itemclass:'nav-item', link:'customers', text:'Clienti'}); %> <% } %>
+    link:'items', text:'Prodotti'}); %><% } %>
   </ul>
   <hr />
   <div class="dropdown">

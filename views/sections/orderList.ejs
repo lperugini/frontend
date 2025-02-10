@@ -4,8 +4,9 @@
     <a href="orders/<%= order.id %>"
       ><h5 class="card-title"><%= order.code %></h5>
     </a>
-    <p class="card-text"><%= order.customer %></p>
-    <p class="card-text"><%= order.product %></p>
+    <p class="card-text"><%= order.userInfo.firstName + ' ' + order.userInfo.lastName %></p>
+    <p class="card-text"><%= order.itemInfo.name %></p>
+    <p class="card-text"><%= order.price %>€</p>
   </div>
 </div>
 <% }); %>
